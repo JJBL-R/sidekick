@@ -1,25 +1,77 @@
--- generates user table with following fields
-CREATE TABLE user {
-  "_id" SERIAL NOT NULL PRIMARY KEY,
-  "name" VARCHAR(100) NOT NULL,
-  "gender" VARCHAR (50) NOT NULL,
-  "age" INT NOT NULL,
-  "email" VARCHAR(319) NOT NULL,
-  "zipcode" INT NOT NULL,
-  };
+CREATE TABLE "public.user" (
+	"_id" serial NOT NULL,
+	"name" varchar(255) NOT NULL,
+	"bio" varchar(255) NOT NULL,
+	"gender" varchar(255) NOT NULL,
+	"age" int NOT NULL,
+	"email" varchar(255) NOT NULL,
+	"zipcode" int NOT NULL,
+	CONSTRAINT "user_pk" PRIMARY KEY ("_id")
+) WITH (
+  OIDS=FALSE
+);
 
---generates sport with name and category (water, winter, summer, etc.)
-CREATE TABLE sport {
-  "_id" SERIAL NOT NULL PRIMARY KEY,
-  "name" VARCHAR(50) NOT NULL,
-  "category" VARCHAR(100) NOT NULL,
-}
 
-CREATE TABLE soccer {
-  "_id" SERIAL NOT NULL PRIMARY KEY,
-  --skill will be (beginner, intermediate, expert)
-  "skill" VARCHAR(100),
-  -- skillgap to allow players to play with any level if they choose so, 0 being false, 1 being true, 
-  "skillgap" BIT DEFAULT 0,
-  FOREIGN KEY (_id) REFERENCES user (_id)
-}
+
+CREATE TABLE "public.sport" (
+	"_id" serial NOT NULL,
+	"soccer" BOOLEAN DEFAULT 'FALSE',
+	"tennis" BOOLEAN DEFAULT 'FALSE',
+	"basketball" BOOLEAN DEFAULT 'FALSE',
+	"user_id" int NOT NULL,
+	CONSTRAINT "sport_pk" PRIMARY KEY ("_id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "public.soccer" (
+	"_id" serial NOT NULL,
+	"skill" varchar(255) NOT NULL,
+	"skillgap" BOOLEAN DEFAULT 'FALSE',
+	"soccer_id" serial NOT NULL,
+	CONSTRAINT "soccer_pk" PRIMARY KEY ("_id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "public.basketball" (
+	"_id" serial NOT NULL,
+	"skill" varchar(255) NOT NULL,
+	"skillgap" BOOLEAN NOT NULL DEFAULT 'FALSE',
+	"basketball_id" serial NOT NULL,
+	CONSTRAINT "basketball_pk" PRIMARY KEY ("_id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "public.tennis" (
+	"_id" serial NOT NULL,
+	"skill" varchar(255) NOT NULL,
+	"skillgap" BOOLEAN NOT NULL DEFAULT 'FALSE',
+	"tennis_id" serial NOT NULL,
+	CONSTRAINT "tennis_pk" PRIMARY KEY ("_id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+
+ALTER TABLE "sport" ADD CONSTRAINT "sport_fk0" FOREIGN KEY ("user_id") REFERENCES "user"("_id");
+
+ALTER TABLE "soccer" ADD CONSTRAINT "soccer_fk0" FOREIGN KEY ("soccer_id") REFERENCES "sport"("soccer");
+
+ALTER TABLE "basketball" ADD CONSTRAINT "basketball_fk0" FOREIGN KEY ("basketball_id") REFERENCES "sport"("basketball");
+
+ALTER TABLE "tennis" ADD CONSTRAINT "tennis_fk0" FOREIGN KEY ("tennis_id") REFERENCES "sport"("tennis");
+
+
+
+
+
