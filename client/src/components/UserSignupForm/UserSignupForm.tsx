@@ -1,11 +1,8 @@
 import React from 'react'
 
-const UserSignupForm = () => {
+const UserSignupForm = (props:any) => {
 
-    function handleSubmit (e) {
-        e.preventDefault();
-        if()
-    }
+const {handleSubmit} = props
 
   return (
     <div>
