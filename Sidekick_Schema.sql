@@ -20,7 +20,7 @@ CREATE TABLE public.user_sport
 	"user_id" INT NOT NULL,
 	"sport_id" INT NOT NULL,
   PRIMARY KEY ("_id")
-  FOREIGN KEY ("user_id") REFERENCES public.user("_id")
+  FOREIGN KEY ("user_id") REFERENCES public.user("_id"),
   FOREIGN KEY ("sport_id") REFERENCES public.sport("_id")
 ) WITH (
   OIDS=FALSE
@@ -42,7 +42,7 @@ CREATE TABLE public.like_user
   "user_id_given" INT NOT NULL,
   "user_id_received" INT NOT NULL,
   "like" BOOLEAN,
-  FOREIGN KEY ("user_id_given") REFERENCES public.user("_id")
+  FOREIGN KEY ("user_id_given") REFERENCES public.user("_id"),
   FOREIGN KEY ("user_id_received") REFERENCES public.user("_id")
 ) WITH (
   OIDS=FALSE
@@ -54,7 +54,7 @@ CREATE TABLE public.dislike_user
   "user_id_given" INT NOT NULL,
   "user_id_received" INT NOT NULL,
   "dislike" BOOLEAN,
-  FOREIGN KEY ("user_id_given") REFERENCES public.user("_id")
+  FOREIGN KEY ("user_id_given") REFERENCES public.user("_id"),
   FOREIGN KEY ("user_id_received") REFERENCES public.user("_id")
 ) WITH (
   OIDS=FALSE
