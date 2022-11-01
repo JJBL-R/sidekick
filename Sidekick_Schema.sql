@@ -1,4 +1,5 @@
-CREATE TABLE "user" (
+CREATE TABLE public.user 
+(
 	"_id" INT GENERATED ALWAYS AS IDENTITY,
 	"first_name" VARCHAR(255) NOT NULL,
 	"last_name" VARCHAR(255) NOT NULL,
@@ -6,53 +7,62 @@ CREATE TABLE "user" (
 	"age" INT NOT NULL,
 	"email" VARCHAR(255) NOT NULL,
 	"zipcode" INT NOT NULL,
-	PRIMARY KEY ("_id"),
+	PRIMARY KEY ("_id")
+) WITH (
+  OIDS=FALSE
 );
 
-
-
-CREATE TABLE "user_sport" (
+CREATE TABLE public.user_sport 
+(
   "_id" INT GENERATED ALWAYS AS IDENTITY,
 	"user_id" INT NOT NULL,
 	"sport_id" INT NOT NULL,
   PRIMARY KEY ("_id")
-  FOREIGN KEY ("user_id") REFERENCES user("_id"),
-  FOREIGN KEY ("sport_id") REFERENCES sport("_id"),
+  FOREIGN KEY ("user_id") REFERENCES public.user("_id"),
+  FOREIGN KEY ("sport_id") REFERENCES public.sport("_id")
+) WITH (
+  OIDS=FALSE
 );
 
-
-
-CREATE TABLE "sport" (
+CREATE TABLE public.sport 
+(
 	"_id" INT GENERATED ALWAYS AS IDENTITY,
 	"sport_name" VARCHAR(255) NOT NULL,
-	PRIMARY KEY ("_id"),
+  "registered" BOOLEAN,
+	PRIMARY KEY ("_id")
+) WITH (
+  OIDS=FALSE
 );
 
-CREATE TABLE "like_user" (
+CREATE TABLE public.like_user 
+(
   "_id" INT GENERATED ALWAYS AS IDENTITY,
   "user_id_given" INT NOT NULL,
   "user_id_received" INT NOT NULL,
   "like" BOOLEAN,
-  FOREIGN KEY ("user_id_given") REFERENCES user("_id"),
-  FOREIGN KEY ("user_id_given") REFERENCES user("_id"),
+  FOREIGN KEY ("user_id_given") REFERENCES public.user("_id"),
+  FOREIGN KEY ("user_id_received") REFERENCES public.user("_id")
+) WITH (
+  OIDS=FALSE
 );
 
-CREATE TABLE "dislike_user" (
+CREATE TABLE public.dislike_user 
+(
   "_id" INT GENERATED ALWAYS AS IDENTITY,
   "user_id_given" INT NOT NULL,
   "user_id_received" INT NOT NULL,
   "dislike" BOOLEAN,
-  FOREIGN KEY ("user_id_given") REFERENCES user("_id"),
-  FOREIGN KEY ("user_id_given") REFERENCES user("_id"),
+  FOREIGN KEY ("user_id_given") REFERENCES public.user("_id"),
+  FOREIGN KEY ("user_id_received") REFERENCES public.user("_id")
+) WITH (
+  OIDS=FALSE
 );
 
+INSERT INTO public.user(first_name, last_name, bio, age, email, zipcode)
+VALUES ('Michael', 'Scott', 'I am compeittive.', '25', 'joe@gmail.com', '90026'),
+       ('Jim', 'Halpert', 'I like to hike.', '28', 'angel@gmail.com', '90026');
 
-
-INSERT INTO user(first_name, last_name, bio, gender, age, email, zipcode)
-VALUES ('Michael', 'Scott', 'I am compeittive.', 'Male', '25', 'joe@gmail.com', '90026'),
-       ('Jim', 'Halpert', 'I like to hike.', 'Female', '28', 'angel@gmail.com', '90026'),
-
-INSERT INTO sport(sport_name)
-VALUES ('Baksetball')
-       ('Tennis')
-       ('Soccer')
+INSERT INTO public.sport(sport_name, registered)
+VALUES ('Baksetball', false),
+       ('Tennis', true),
+       ('Soccer', true);
