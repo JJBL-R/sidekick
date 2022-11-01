@@ -7,6 +7,8 @@ CREATE TABLE public.user
 	"age" INT NOT NULL,
 	"email" VARCHAR(255) NOT NULL,
 	"zipcode" INT NOT NULL,
+  "facebook_id" VARCHAR NOT NULL,
+  "registered" BOOLEAN,
 	PRIMARY KEY ("_id")
 ) WITH (
   OIDS=FALSE
@@ -58,9 +60,9 @@ CREATE TABLE public.dislike_user
   OIDS=FALSE
 );
 
-INSERT INTO public.user(first_name, last_name, bio, age, email, zipcode)
-VALUES ('Michael', 'Scott', 'I am compeittive.', '25', 'joe@gmail.com', '90026'),
-       ('Jim', 'Halpert', 'I like to hike.', '28', 'angel@gmail.com', '90026');
+INSERT INTO public.user(first_name, last_name, bio, age, email, zipcode, facebook_id, registered)
+VALUES ('Michael', 'Scott', 'I am compeittive.', '25', 'joe@gmail.com', '90026', 'f92hg923gh8', true),
+       ('Jim', 'Halpert', 'I like to hike.', '28', 'angel@gmail.com', '90026', '2389gh248', true);
 
 INSERT INTO public.sport(sport_name, registered)
 VALUES ('Baksetball', false),
