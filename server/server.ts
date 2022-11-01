@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import path from 'path';
-
+import authRouter from './routes/auth';
+import passport from 'passport';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,8 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve('./frontend/dist/assets')));
 
 // routers
-// app.use('/userAPI', userApiRouter);
-
+app.use('/auth', authRouter);
 
 app.get('*', (req, res): void => {
   res.status(200).sendFile(path.resolve('dist/index.html'));
