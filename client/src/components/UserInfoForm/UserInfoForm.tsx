@@ -35,7 +35,7 @@ const UserInfoForm = () => {
         //     .catch((err) => {
         //         console.log('addUser error front', err);
         //     });
-        Navigate('/userProfiles')
+        Navigate('/mainPage')
     };
 
   return (
