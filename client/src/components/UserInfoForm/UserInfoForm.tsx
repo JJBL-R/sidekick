@@ -34,6 +34,7 @@ const UserInfoForm = () => {
             .catch((err) => {
                 console.log('addUser error front', err);
             });
+            
     };
 
   return (

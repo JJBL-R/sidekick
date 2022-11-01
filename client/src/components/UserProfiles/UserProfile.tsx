@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-const UserProfiles = () => {
+const UserProfile = () => {
 
 const [profile, setProfile] = useState([]);
 
@@ -25,4 +25,4 @@ useEffect(() => {
   )
 }
 
-export default UserProfiles
+export default UserProfile
