@@ -1,77 +1,58 @@
-CREATE TABLE "public.user" (
-	"_id" serial NOT NULL,
-	"name" varchar(255) NOT NULL,
-	"bio" varchar(255) NOT NULL,
-	"gender" varchar(255) NOT NULL,
-	"age" int NOT NULL,
-	"email" varchar(255) NOT NULL,
-	"zipcode" int NOT NULL,
-	CONSTRAINT "user_pk" PRIMARY KEY ("_id")
-) WITH (
-  OIDS=FALSE
+CREATE TABLE "user" (
+	"_id" INT GENERATED ALWAYS AS IDENTITY,
+	"first_name" VARCHAR(255) NOT NULL,
+	"last_name" VARCHAR(255) NOT NULL,
+	"bio" TEXT,
+	"age" INT NOT NULL,
+	"email" VARCHAR(255) NOT NULL,
+	"zipcode" INT NOT NULL,
+	PRIMARY KEY ("_id"),
 );
 
 
 
-CREATE TABLE "public.sport" (
-	"_id" serial NOT NULL,
-	"soccer" BOOLEAN DEFAULT 'FALSE',
-	"tennis" BOOLEAN DEFAULT 'FALSE',
-	"basketball" BOOLEAN DEFAULT 'FALSE',
-	"user_id" int NOT NULL,
-	CONSTRAINT "sport_pk" PRIMARY KEY ("_id")
-) WITH (
-  OIDS=FALSE
+CREATE TABLE "user_sport" (
+  "_id" INT GENERATED ALWAYS AS IDENTITY,
+	"user_id" INT NOT NULL,
+	"sport_id" INT NOT NULL,
+  PRIMARY KEY ("_id")
+  FOREIGN KEY ("user_id") REFERENCES user("_id"),
+  FOREIGN KEY ("sport_id") REFERENCES sport("_id"),
 );
 
 
 
-CREATE TABLE "public.soccer" (
-	"_id" serial NOT NULL,
-	"skill" varchar(255) NOT NULL,
-	"skillgap" BOOLEAN DEFAULT 'FALSE',
-	"soccer_id" serial NOT NULL,
-	CONSTRAINT "soccer_pk" PRIMARY KEY ("_id")
-) WITH (
-  OIDS=FALSE
+CREATE TABLE "sport" (
+	"_id" INT GENERATED ALWAYS AS IDENTITY,
+	"sport_name" VARCHAR(255) NOT NULL,
+	PRIMARY KEY ("_id"),
+);
+
+CREATE TABLE "like_user" (
+  "_id" INT GENERATED ALWAYS AS IDENTITY,
+  "user_id_given" INT NOT NULL,
+  "user_id_received" INT NOT NULL,
+  "like" BOOLEAN,
+  FOREIGN KEY ("user_id_given") REFERENCES user("_id"),
+  FOREIGN KEY ("user_id_given") REFERENCES user("_id"),
+);
+
+CREATE TABLE "dislike_user" (
+  "_id" INT GENERATED ALWAYS AS IDENTITY,
+  "user_id_given" INT NOT NULL,
+  "user_id_received" INT NOT NULL,
+  "dislike" BOOLEAN,
+  FOREIGN KEY ("user_id_given") REFERENCES user("_id"),
+  FOREIGN KEY ("user_id_given") REFERENCES user("_id"),
 );
 
 
 
-CREATE TABLE "public.basketball" (
-	"_id" serial NOT NULL,
-	"skill" varchar(255) NOT NULL,
-	"skillgap" BOOLEAN NOT NULL DEFAULT 'FALSE',
-	"basketball_id" serial NOT NULL,
-	CONSTRAINT "basketball_pk" PRIMARY KEY ("_id")
-) WITH (
-  OIDS=FALSE
-);
+INSERT INTO user(first_name, last_name, bio, gender, age, email, zipcode)
+VALUES ('Michael', 'Scott', 'I am compeittive.', 'Male', '25', 'joe@gmail.com', '90026'),
+       ('Jim', 'Halpert', 'I like to hike.', 'Female', '28', 'angel@gmail.com', '90026'),
 
-
-
-CREATE TABLE "public.tennis" (
-	"_id" serial NOT NULL,
-	"skill" varchar(255) NOT NULL,
-	"skillgap" BOOLEAN NOT NULL DEFAULT 'FALSE',
-	"tennis_id" serial NOT NULL,
-	CONSTRAINT "tennis_pk" PRIMARY KEY ("_id")
-) WITH (
-  OIDS=FALSE
-);
-
-
-
-
-ALTER TABLE "sport" ADD CONSTRAINT "sport_fk0" FOREIGN KEY ("user_id") REFERENCES "user"("_id");
-
-ALTER TABLE "soccer" ADD CONSTRAINT "soccer_fk0" FOREIGN KEY ("soccer_id") REFERENCES "sport"("soccer");
-
-ALTER TABLE "basketball" ADD CONSTRAINT "basketball_fk0" FOREIGN KEY ("basketball_id") REFERENCES "sport"("basketball");
-
-ALTER TABLE "tennis" ADD CONSTRAINT "tennis_fk0" FOREIGN KEY ("tennis_id") REFERENCES "sport"("tennis");
-
-
-
-
-
+INSERT INTO sport(sport_name)
+VALUES ('Baksetball')
+       ('Tennis')
+       ('Soccer')
