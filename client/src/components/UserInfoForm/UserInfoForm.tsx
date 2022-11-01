@@ -1,7 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const UserInfoForm = () => {
-   
+    const Navigate = useNavigate();
 
     const handleAddUserInfo = (e:any) => {
         let newCity = e.target[0].value;
@@ -14,27 +15,27 @@ const UserInfoForm = () => {
         console.log(e);
 
         e.preventDefault();
-        fetch('', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                city: newCity,
-                zipCode: newZipCode,
-                sport: newSport,
-                bio: newBio,
-                photo: newPhoto,
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log('Successfuly added', data);
-            })
-            .catch((err) => {
-                console.log('addUser error front', err);
-            });
-            
+        // fetch('', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         city: newCity,
+        //         zipCode: newZipCode,
+        //         sport: newSport,
+        //         bio: newBio,
+        //         photo: newPhoto,
+        //     }),
+        // })
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //         console.log('Successfuly added', data);
+        //     })
+        //     .catch((err) => {
+        //         console.log('addUser error front', err);
+        //     });
+        Navigate('/userProfiles')
     };
 
   return (
