@@ -1,4 +1,4 @@
-import Landing from "../pages/Landing"
+import Landing from "../pages/Landing/Landing"
 import Register from "../pages/Register"
 import UserProfile from "../components/UserProfiles/UserProfile";
 import Matches from "../components/Matches/Matches";
