@@ -12,29 +12,9 @@ import {
 import 'react-swipeable-list/dist/styles.css';
 
 
+
 const UserProfile = () => {
 
-
-
-  const leadingActions = () => (
-    <LeadingActions>
-      <SwipeAction onClick={() => console.info('swipe action triggered')}>
-        Match
-      </SwipeAction>
-    </LeadingActions>
-  );
-  
-  const trailingActions = () => (
-    <TrailingActions>
-      <SwipeAction
-        destructive={true}
-        onClick={() => console.info('swipe action triggered')}
-      >
-        No Match
-      </SwipeAction>
-    </TrailingActions>
-  );
-  
 
 const [profile, setProfile] = useState({});
 
@@ -58,18 +38,9 @@ const [profile, setProfile] = useState({});
 
 
   return (
-    <div>
-    <SwipeableList>
-      <SwipeableListItem 
-      leadingActions= {leadingActions()}
-      trailingActions={trailingActions()}
-      >
-      <Test/> 
-      </SwipeableListItem>
-    </SwipeableList>
-      <Link to="/matches">
-      <button id="matches">Matches</button>
-      </Link>
+    <div className='testing'>
+      <h1>UserProfile</h1>
+      <p>Bio</p>
     </div>
   )
 }

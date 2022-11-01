@@ -1,6 +1,6 @@
 import React from 'react'
 import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
-import UserProfile from '../UserProfiles/UserProfile';
+import UserProfile from '../../components/UserProfiles/UserProfile';
 import {
     LeadingActions,
     SwipeableList,
@@ -9,13 +9,33 @@ import {
     TrailingActions,
   } from 'react-swipeable-list';
   import 'react-swipeable-list/dist/styles.css';
+  import Test from '../../components/Test';
+  import './MainPageStyles.css'
+ 
+  
+
+
+
 
 const MainPage = () => {
 
+    function handleSwipe () {
+        console.log('swipped')
+        // fetch()
+        // .then(res => res.json())
+        // .then((respdata) => {
+            
+        // })
+        // .catch((err) => {
+        // })
+    }
+
     const leadingActions = () => (
         <LeadingActions>
-          <SwipeAction onClick={() => console.info('swipe action triggered')}>
-            Match
+          <SwipeAction 
+          destructive={true}
+          onClick={handleSwipe}>
+            <Test/>
           </SwipeAction>
         </LeadingActions>
       );
@@ -24,15 +44,13 @@ const MainPage = () => {
         <TrailingActions>
           <SwipeAction
             destructive={true}
-            onClick={() => console.info('swipe action triggered')}
-          >
-            No Match
+            onClick={handleSwipe}>
           </SwipeAction>
         </TrailingActions>
       );
       
   return (
-    <div>
+    <div className='mainPage'>
     <h1>Main Page</h1>
     <SwipeableList>
       <SwipeableListItem 
@@ -42,6 +60,9 @@ const MainPage = () => {
       <UserProfile/> 
       </SwipeableListItem>
     </SwipeableList>
+    <Link to="/matches">
+      <button id="matches">Matches</button>
+    </Link>
     </div>
   )
 }
