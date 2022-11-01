@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import path from 'path';
+import authRouter from './routes/auth';
 
 
 const app = express();
@@ -12,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve('./frontend/dist/assets')));
 
 // routers
-// app.use('/userAPI', userApiRouter);
+app.use('/auth', authRouter);
 
 
 app.get('*', (req, res): void => {
