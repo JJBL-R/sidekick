@@ -12,10 +12,8 @@ router.post('/', userController.createUser, (req, res) => {
 });
 
 router.post('/verify', userController.verifyUser, (req, res) => {
-  res.status(200).json(res.locals.user);
+  res.status(200).json(res.locals.verify);
 });
-
-
 
 router.patch('/', userController.updateUser, (req, res) => {
   res.status(200).json(res.locals.update);

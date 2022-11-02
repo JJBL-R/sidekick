@@ -60,17 +60,13 @@ const userController: UserController = {
   
   verifyUser: async (req, res, next): Promise<void> => {
     try {
-      const { registered } = req.body;
-    if (!registered) {
-        return next({
-          log: null,
-          status: 400,
-          message: 'Please register before proceeding.',
-        })
-    } else {
-      res.locals.register = registered 
+      const { google_id } = req.body;
+      const text = `SELECT * FROM "user" WHERE google_id='${google_id}'`
+      const result = await db.query(text)
+      console.log(result);
+      if (result.rows.length > 0) res.locals.verify = true;
+      else res.locals.verify = false;
       return next();
-      };
     } catch (error) {
       return next({
         log: `Error caught in userController.verifyUser ${error}`,
