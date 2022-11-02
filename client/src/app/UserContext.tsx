@@ -1,16 +1,16 @@
 // @ts-nocheck
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState } from 'react';
 
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
-   const [user, setUser] = useState('');
-   
-   return (
+  const [user, setUser] = useState({});
+
+  return (
     <UserContext.Provider value={{ user, setUser }}>
-        {children}
+      {children}
     </UserContext.Provider>
-   )
+  );
 }
 
 export default UserContext;

@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
+import UserContext from '../../app/UserContext';
 import { useForm } from 'react-hook-form';
 import {
   Stack,
@@ -6,6 +7,7 @@ import {
   Button,
   Checkbox,
   CheckboxGroup,
+  Textarea,
 } from '@chakra-ui/react';
 import {
   Modal,
@@ -20,8 +22,17 @@ import { FormLabel } from '@chakra-ui/react';
 const UserInfoForm = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, reset } = useForm();
+
+  const { user }: any = useContext(UserContext);
+
   const onSubmit = (data: any) => {
-    console.log(data);
+    fetch('/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ...data, google_id: user.google_id }),
+    }).then(() => console.log(data));
     reset();
   };
 
@@ -37,20 +48,20 @@ const UserInfoForm = () => {
           </ModalHeader>
           <ModalBody>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <Stack spacing={7}>
+              <Stack spacing={6}>
                 <Input
                   required
                   variant="flushed"
                   placeholder="First Name"
                   _placeholder={{ color: 'gray' }}
-                  {...register('firstname')}
+                  {...register('first_name')}
                 />
                 <Input
                   required
                   variant="flushed"
                   placeholder="Last Name"
                   _placeholder={{ color: 'gray' }}
-                  {...register('lastname')}
+                  {...register('last_name')}
                 />
                 <Input
                   required
@@ -66,7 +77,7 @@ const UserInfoForm = () => {
                   minLength={5}
                   maxLength={5}
                   _placeholder={{ color: 'gray' }}
-                  {...register('zip')}
+                  {...register('zipcode')}
                 />
                 <FormLabel color="gray" fontWeight={400}>
                   Birth Date
@@ -75,8 +86,12 @@ const UserInfoForm = () => {
                   id="birthdate"
                   placeholder="Birth Date"
                   type="date"
-                  {...register('birthdate', { required: true })}
+                  {...register('birthDate', { required: true })}
                 />
+                <FormLabel color="gray" fontWeight={400}>
+                  Bio
+                </FormLabel>
+                <Textarea placeholder="" />
                 <CheckboxGroup colorScheme="red">
                   <FormLabel color="gray" fontWeight={400}>
                     Sports
