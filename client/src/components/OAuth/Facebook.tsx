@@ -4,7 +4,7 @@ import './OAuth.scss';
 const Facebook = () => {
   const handleClick = () => {
     fetch('/auth/facebook/login')
-      .then((resp) => resp.json())
+      .then((resp) => console.log(resp))
       .then((data) => console.log(data));
   };
   return (

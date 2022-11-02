@@ -8,7 +8,7 @@
     right: 7.5%;
     font-family: 'Poppins';
     text-decoration: underline;
-    font-size: 7.5rem;
+    font-size: 5rem;
     font-weight: 900;
     color: white;
     opacity: 0.9;
@@ -21,6 +21,7 @@
 
     h2 {
       font-size: 4rem;
+      font-style: italic;
     }
 
     p {
@@ -31,7 +32,7 @@
   #sidekick {
     position: absolute;
     top: 35%;
-    right: 25%;
+    right: 35%;
     height: 65%;
     width: 30%;
   }
