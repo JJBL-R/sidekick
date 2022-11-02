@@ -5,17 +5,19 @@
     align-items: center;
     background-color: #FEFEFE;
     .sidekick {
-        font-size: 50px;
+        font-size: 60px;
         font-weight: 600;
         color: #FEFEFE;
         text-align: left;
         width: 90%;
         text-decoration: underline;
     }
-    background: linear-gradient(blue, white)
+    background: linear-gradient(#ea6442, #194076)
 }
 
-
+.chakra-ui-light{
+    background-color: #194076;
+}
 
 .container {
     display: flex;

@@ -7,13 +7,23 @@
   border-radius: 2rem;
   padding: 0 2rem;
   width: 100%;
-  background-color: #c0fadf;
+  background-color: rgb(141, 141, 212);
   height: 50rem;
   z-index: 3;
 }
 
+.innerPic {
+  width: 25rem;
+  position: absolute;
+  color: white;
+  padding-top: 15px;
+  padding-left: 25px;
+}
+
+
 .image {
-  height: 20rem;
+  border-radius: 15px;
+  height: 25rem;
   width: 25rem;
   user-select: none;
   -moz-user-select: none;
@@ -23,11 +33,16 @@
 }
 
 .name {
+  position: relative;
   margin: 0;
   width: 25rem;
+  font-size: 25px;
+  font-weight: 700;
 }
 
 .sport {
+  font-size: 25px;
+  font-weight: 700;
   margin: 0;
   width: 25rem;
 }
@@ -35,12 +50,28 @@
 .location {
   margin: 0;
   width: 25rem;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .bio {
+  font-weight: 500;
   width: 25rem;
+  box-shadow: 50px;
+  padding-top: 20px;
 }
 
+.bioTitle{
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.bioContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 /* .gradient-canvas {
   position: absolute;
   width: 70%;
