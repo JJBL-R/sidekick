@@ -25,12 +25,6 @@ const userController: UserController = {
           status: 400,
           message: 'Enter a valid first name, last name, bio, age, email, and/or zipcode.',
         });
-      } else if (!registered) {
-        return next({
-          log: null,
-          status: 400,
-          message: 'Please register before proceeding.'
-        })
       } else {
         const result = await db.query(text, params);
         res.locals.user = result;
@@ -42,50 +36,21 @@ const userController: UserController = {
         status: 409,
         message: 'User already exists!',
       });
-    }
+    };
   },
-  verifyUser: async (req, res, next) => {
+  
+  verifyUser: async (req, res, next): Promise<void> => {
     try {
-      const { email, plainPassword } = req.body;
-
-      if (!email || !plainPassword) {
+      const { registered } = req.body;
+    if (!registered) {
         return next({
           log: null,
-          message: 'Please enter your email and/or password',
-        });
-      }
-      let loggedInUser;
-      try {
-        loggedInUser = await prisma.user.findFirstOrThrow({
-          where: {
-            email,
-          },
-        });
-      } catch {
-        return next({
-          log: null,
-          status: 401,
-          message: 'Invalid email or password',
-        });
-      }
-
-      const validPassword = await bcrypt.compare(
-        plainPassword,
-        loggedInUser.passwordHash
-      );
-      if (validPassword) {
-        res.locals.user = loggedInUser.username;
-        res.locals.userId = loggedInUser.id;
-        res.locals.depPrefs = loggedInUser.depPrefs;
-      } else {
-        return next({
-          log: 'null',
-          status: 401,
-          message: 'Invalid email and or password',
-        });
-      }
-
+          status: 400,
+          message: 'Please register before proceeding.',
+        })
+    } else {
       return next();
+      };
     } catch (error) {
       return next({
         log: `Error caught in userController.verifyUser ${error}`,
