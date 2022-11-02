@@ -36,10 +36,10 @@ const userController: UserController = {
 
   createUser: async (req, res, next): Promise<void> => {
     try {
-      const { first_name, last_name, bio, birthdate, email, zipcode, google_id } = req.body;
-      const text = 'INSERT INTO public.user(first_name, last_name, bio, birthdate, email, zipcode, google_id, registered) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *'
-      const params = [first_name, last_name, bio, birthdate, email, zipcode, google_id, true]
-      if (!first_name || !last_name || !bio || !birthdate || !email || !zipcode || !google_id) {
+      const { first_name, last_name, bio, birthdate, email, zipcode, google_id, city } = req.body;
+      const text = 'INSERT INTO public.user(first_name, last_name, bio, birthdate, email, zipcode, google_id, city, registered) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *'
+      const params = [first_name, last_name, bio, birthdate, email, zipcode, google_id, city, true]
+      if (!first_name || !last_name || !bio || !birthdate || !email || !zipcode || !google_id || !city) {
         return next({
           log: null,
           status: 400,
@@ -82,9 +82,9 @@ const userController: UserController = {
 
   updateUser: async (req, res, next): Promise<void> => {
     try {
-      const { first_name, last_name, bio, birthdate, email, zipcode, _id } = req.query;
-      const text = 'UPDATE public.user SET first_name=$1 last_name=$2 bio=$3 birthdate=$4 email=$5 zipcode=$6 WHERE _id=$7 RETURNING *'
-      const params = [first_name, last_name, bio, birthdate, email, zipcode, _id]
+      const { first_name, last_name, bio, birthdate, email, zipcode, city, _id } = req.query;
+      const text = 'UPDATE public.user SET first_name=$1 last_name=$2 bio=$3 birthdate=$4 email=$5 zipcode=$6 city=$7 WHERE _id=$8 RETURNING *'
+      const params = [first_name, last_name, bio, birthdate, email, zipcode, city, _id]
       const result = await db.query(text, params);
       res.locals.update = result;
       return next();

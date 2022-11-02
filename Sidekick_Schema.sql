@@ -68,3 +68,5 @@ INSERT INTO public.sport(sport_name, registered)
 VALUES ('Basketball', false),
        ('Tennis', true),
        ('Soccer', true);
+
+ALTER TABLE public.user ADD city VARCHAR(250) NOT NULL DEFAULT 'Vancouver';
