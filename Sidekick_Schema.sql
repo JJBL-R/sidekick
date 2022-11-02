@@ -8,7 +8,7 @@ CREATE TABLE public.user
 	"email" VARCHAR(255) NOT NULL,
 	"zipcode" INT NOT NULL,
   "facebook_id" VARCHAR NOT NULL,
-  "registered" BOOLEAN,
+  "registered" BOOLEAN DEFAULT NULL,
 	PRIMARY KEY ("_id")
 ) WITH (
   OIDS=FALSE
