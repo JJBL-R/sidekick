@@ -48,7 +48,7 @@ const UserInfoForm = () => {
           </ModalHeader>
           <ModalBody>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <Stack spacing={6}>
+              <Stack spacing={5}>
                 <Input
                   required
                   variant="flushed"
@@ -73,6 +73,13 @@ const UserInfoForm = () => {
                 <Input
                   required
                   variant="flushed"
+                  placeholder="City"
+                  _placeholder={{ color: 'gray' }}
+                  {...register('city')}
+                />
+                <Input
+                  required
+                  variant="flushed"
                   placeholder="Zipcode"
                   minLength={5}
                   maxLength={5}
@@ -83,10 +90,10 @@ const UserInfoForm = () => {
                   Birth Date
                 </FormLabel>
                 <Input
-                  id="birthdate"
+                  id="birthDate"
                   placeholder="Birth Date"
                   type="date"
-                  {...register('birthDate', { required: true })}
+                  {...register('birthdate', { required: true })}
                 />
                 <FormLabel color="gray" fontWeight={400}>
                   Bio

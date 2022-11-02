@@ -1,4 +1,5 @@
-import React from 'react';
+// @ts-nocheck
+import React, { useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import UserProfile from '../../components/UserProfile/UserProfile';
 import UserInfoForm from '../../components/UserInfoForm/UserInfoForm';
@@ -15,16 +16,7 @@ import Swipeleft from '../../components/Swipes/SwipeLeft';
 import './MainPageStyles.css';
 
 const MainPage = () => {
-  function handleSwipe() {
-    console.log('swipped');
-    // fetch()
-    // .then(res => res.json())
-    // .then((respdata) => {
-
-    // })
-    // .catch((err) => {
-    // })
-  }
+  const handleSwipe = () => {};
 
   const leadingActions = () => (
     <LeadingActions>
@@ -44,7 +36,7 @@ const MainPage = () => {
 
   return (
     <div className="mainPage">
-      <UserInfoForm />
+      {/* <UserInfoForm /> */}
       <h1>sidekick</h1>
       <div className="container">
         <SwipeableList>
