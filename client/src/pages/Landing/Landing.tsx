@@ -9,6 +9,7 @@ import { Gradient } from './Gradient.js';
 
 const Landing = () => {
   const gradient = new Gradient();
+
   useEffect(() => {
     gradient.initGradient('#gradient-canvas');
   });

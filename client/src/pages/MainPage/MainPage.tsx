@@ -9,7 +9,8 @@ import {
     TrailingActions,
   } from 'react-swipeable-list';
   import 'react-swipeable-list/dist/styles.css';
-  import Test from '../../components/Test';
+  import SwipeRight from '../../components/Swipes/SwipeRight';
+  import Swipeleft from '../../components/Swipes/SwipeLeft';
   import './MainPageStyles.css'
  
   
@@ -35,7 +36,7 @@ const MainPage = () => {
           <SwipeAction 
           destructive={true}
           onClick={handleSwipe}>
-            <Test/>
+            <SwipeRight/>
           </SwipeAction>
         </LeadingActions>
       );
@@ -45,13 +46,14 @@ const MainPage = () => {
           <SwipeAction
             destructive={true}
             onClick={handleSwipe}>
+             <Swipeleft/>
           </SwipeAction>
         </TrailingActions>
       );
       
   return (
     <div className='mainPage'>
-    <h1>Main Page</h1>
+    <h1>sidekick</h1>
     <SwipeableList>
       <SwipeableListItem 
       leadingActions= {leadingActions()}
@@ -60,9 +62,9 @@ const MainPage = () => {
       <UserProfile/> 
       </SwipeableListItem>
     </SwipeableList>
-    <Link to="/matches">
+    {/* <Link to="/matches">
       <button id="matches">Matches</button>
-    </Link>
+    </Link> */}
     </div>
   )
 }

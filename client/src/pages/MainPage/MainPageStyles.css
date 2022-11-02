@@ -13,4 +13,5 @@
 .swipeable-list-item__content {
     display: flex;
     justify-content: center;
+    background-color: #5bbea0;
 }
