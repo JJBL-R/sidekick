@@ -62,3 +62,5 @@ const swipeController: SwipeController = {
     };
   },
 }
+
+export default swipeController;
