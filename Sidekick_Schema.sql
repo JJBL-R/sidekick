@@ -4,24 +4,12 @@ CREATE TABLE public.user
 	"first_name" VARCHAR(255) NOT NULL,
 	"last_name" VARCHAR(255) NOT NULL,
 	"bio" TEXT,
-	"birthDate" DATE NOT NULL,
+	"birthdate" VARCHAR NOT NULL,
 	"email" VARCHAR(255) NOT NULL,
 	"zipcode" INT NOT NULL,
   "google_id" VARCHAR NOT NULL,
   "registered" BOOLEAN DEFAULT NULL,
 	PRIMARY KEY ("_id")
-) WITH (
-  OIDS=FALSE
-);
-
-CREATE TABLE public.user_sport 
-(
-  "_id" INT GENERATED ALWAYS AS IDENTITY,
-	"user_id" INT NOT NULL,
-	"sport_id" INT NOT NULL,
-  PRIMARY KEY ("_id")
-  FOREIGN KEY ("user_id") REFERENCES public.user("_id"),
-  FOREIGN KEY ("sport_id") REFERENCES public.sport("_id")
 ) WITH (
   OIDS=FALSE
 );
@@ -32,6 +20,18 @@ CREATE TABLE public.sport
 	"sport_name" VARCHAR(255) NOT NULL,
   "registered" BOOLEAN,
 	PRIMARY KEY ("_id")
+) WITH (
+  OIDS=FALSE
+);
+
+CREATE TABLE public.user_sport 
+(
+  "_id" INT GENERATED ALWAYS AS IDENTITY,
+	"user_id" INT NOT NULL,
+	"sport_id" INT NOT NULL,
+  PRIMARY KEY ("_id"),
+  FOREIGN KEY ("user_id") REFERENCES public.user("_id"),
+  FOREIGN KEY ("sport_id") REFERENCES public.sport("_id")
 ) WITH (
   OIDS=FALSE
 );
@@ -60,11 +60,11 @@ CREATE TABLE public.dislike_user
   OIDS=FALSE
 );
 
-INSERT INTO public.user(first_name, last_name, bio, age, email, zipcode, facebook_id, registered)
-VALUES ('Michael', 'Scott', 'I am compeittive.', '25', 'joe@gmail.com', '90026', 'f92hg923gh8', true),
-       ('Jim', 'Halpert', 'I like to hike.', '28', 'angel@gmail.com', '90026', '2389gh248', true);
+INSERT INTO public.user(first_name, last_name, bio, birthdate, email, zipcode, google_id, registered)
+VALUES ('Michael', 'Scott', 'I am compeittive.', '1997-03-25', 'joe@gmail.com', '90026', 'f92hg923gh8', true),
+       ('Jim', 'Halpert', 'I like to hike.', '1993-09-11', 'angel@gmail.com', '90026', '2389gh248', true);
 
 INSERT INTO public.sport(sport_name, registered)
-VALUES ('Baksetball', false),
+VALUES ('Basketball', false),
        ('Tennis', true),
        ('Soccer', true);
