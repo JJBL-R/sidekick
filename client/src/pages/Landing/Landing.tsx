@@ -20,7 +20,7 @@ const Landing = () => {
       <img id="clouds" src="/client/src/assets/clouds.webp" alt="" />
       <img id="sidekick" src="/client/src/assets/sidekick.png" alt="" />
       <div className="text-container">
-        <h2>It takes two</h2>
+        <h2>it takes two</h2>
         <p>Never go again without having somebody to play a sport with!</p>
         <p>
           Sidekick matches you based on location and skill level to find your
