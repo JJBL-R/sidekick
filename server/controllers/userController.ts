@@ -9,6 +9,7 @@ const db = require('../Sidekick_SQL');
  */
 
 interface UserController {
+  getUser: (req: Request, res: Response, next: NextFunction) => void;
   createUser: (req: Request, res: Response, next: NextFunction) => void;
   verifyUser: (req: Request, res: Response, next: NextFunction) => void;
   updateUser: (req: Request, res: Response, next: NextFunction) => void;
@@ -16,6 +17,22 @@ interface UserController {
 }
 
 const userController: UserController = {
+  getUser: async (req, res, next): Promise<void> => {
+    try {
+      const text = 'SELECT * FROM public.user'
+      const result = await db.query(text)
+      res.locals.users = result;
+      return next();
+    } catch (error) {
+      return next({
+        log: `Error caught in userController.getUser ${error}`,
+        status: 409,
+        message: `Error has occured in userController.getUser. ERROR: Unable to get user, and/or ${error}`,
+      });
+    };
+
+  },
+
   createUser: async (req, res, next): Promise<void> => {
     try {
       const { first_name, last_name, bio, age, email, zipcode, facebook_id, registered } = req.body;
