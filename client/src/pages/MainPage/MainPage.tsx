@@ -1,6 +1,7 @@
-import React from 'react'
-import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
-import UserProfile from '../../components/UserProfiles/UserProfile';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import UserProfile from '../../components/UserProfile/UserProfile';
+import UserInfoForm from '../../components/UserInfoForm/UserInfoForm';
 import {
     LeadingActions,
     SwipeableList,
@@ -19,17 +20,16 @@ import {
 
 
 const MainPage = () => {
+  function handleSwipe() {
+    console.log('swipped');
+    // fetch()
+    // .then(res => res.json())
+    // .then((respdata) => {
 
-    function handleSwipe () {
-        console.log('swipped')
-        // fetch()
-        // .then(res => res.json())
-        // .then((respdata) => {
-            
-        // })
-        // .catch((err) => {
-        // })
-    }
+    // })
+    // .catch((err) => {
+    // })
+  }
 
     const leadingActions = () => (
         <LeadingActions>
@@ -71,7 +71,7 @@ const MainPage = () => {
       <button id="matches">Matches</button>
     </Link> */}
     </div>
-  )
-}
+  );
+};
 
-export default MainPage
+export default MainPage;
