@@ -68,6 +68,7 @@ const userController: UserController = {
           message: 'Please register before proceeding.',
         })
     } else {
+      res.locals.register = registered 
       return next();
       };
     } catch (error) {
