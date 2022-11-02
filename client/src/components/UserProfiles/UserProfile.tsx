@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useSwipeable} from 'react-swipeable';
 import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
-import Test from '../SwipeRight';
+import Test from '../Swipes/SwipeRight';
 import {
   LeadingActions,
   SwipeableList,

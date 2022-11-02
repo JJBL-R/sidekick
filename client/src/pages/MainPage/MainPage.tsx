@@ -54,14 +54,19 @@ const MainPage = () => {
   return (
     <div className='mainPage'>
     <h1>sidekick</h1>
-    <SwipeableList>
-      <SwipeableListItem 
-      leadingActions= {leadingActions()}
-      trailingActions={trailingActions()}
-      >
-      <UserProfile/> 
-      </SwipeableListItem>
-    </SwipeableList>
+    <div className='container'>
+      <SwipeableList>
+        <SwipeableListItem 
+        leadingActions= {leadingActions()}
+        trailingActions={trailingActions()}
+        >
+        <UserProfile/> 
+        </SwipeableListItem>
+      </SwipeableList>
+      <div className='gifContainer'>
+        <img className='gif' src='/client/src/assets/squad.gif'></img>
+      </div>
+    </div>
     {/* <Link to="/matches">
       <button id="matches">Matches</button>
     </Link> */}
