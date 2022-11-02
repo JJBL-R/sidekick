@@ -33,9 +33,13 @@ const UserProfile = () => {
         className="image"
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Kobe_Bryant_2014.jpg/640px-Kobe_Bryant_2014.jpg"
       ></img>
+      <div className='innerPic'>
       <h1 className="name">Brian Yang, 25</h1>
-      <h2 className="sport">Basketball 🏀</h2>
+      <h2 className="sport">Basketball</h2>
       <h2 className="location">Los Angeles, 90210</h2>
+      </div>
+      <div className="bioContainer">
+      <h3 className="bioTitle">Bio</h3>
       <p className="bio">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat
         possimus aliquid saepe rerum sunt! Voluptatum quaerat modi, voluptate,
