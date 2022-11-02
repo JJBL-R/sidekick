@@ -4,7 +4,8 @@ import { gapi } from 'gapi-script';
 import Facebook from '../../components/OAuth/Facebook';
 import Google from '../../components/OAuth/Google';
 
-const clientId = "600150108739-1hcnbkbmbctp79as2rjbk689efsh1mjb.apps.googleusercontent.com";
+const clientId =
+  '600150108739-1hcnbkbmbctp79as2rjbk689efsh1mjb.apps.googleusercontent.com';
 // @ts-ignore
 import { Gradient } from './Gradient.js';
 
@@ -19,12 +20,12 @@ const Landing = () => {
     function start() {
       gapi.client.init({
         clientId: clientId,
-        scope: ""
-      })
-    };
+        scope: '',
+      });
+    }
 
-    gapi.load('client:auth2', start)
-  })
+    gapi.load('client:auth2', start);
+  });
 
   return (
     <div className="landing">
@@ -42,7 +43,6 @@ const Landing = () => {
       </div>
       <Google />
       <Facebook />
-      {/* <video src="https://vp.nyt.com/video/2020/07/21/87571_1_00-sports-reboot-promo_wg_1080p.mp4" muted loop autoPlay playsInline></video> */}
     </div>
   );
 };
