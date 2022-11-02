@@ -8,7 +8,7 @@
   padding: 0 2rem;
   width: 100%;
   background-color: rgb(141, 141, 212);
-  height: 50rem;
+  height: 45rem;
   z-index: 3;
 }
 
@@ -19,7 +19,6 @@
   padding-top: 15px;
   padding-left: 25px;
 }
-
 
 .image {
   border-radius: 15px;
@@ -61,7 +60,7 @@
   padding-top: 20px;
 }
 
-.bioTitle{
+.bioTitle {
   font-size: 25px;
   font-weight: 600;
 }
