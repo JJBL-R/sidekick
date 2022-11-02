@@ -12,7 +12,7 @@ import {
   import 'react-swipeable-list/dist/styles.css';
   import SwipeRight from '../../components/Swipes/SwipeRight';
   import Swipeleft from '../../components/Swipes/SwipeLeft';
-  import './MainPageStyles.css'
+  import './MainPageStyles.scss'
  
   
 
@@ -53,7 +53,7 @@ const MainPage = () => {
       
   return (
     <div className='mainPage'>
-    <h1>sidekick</h1>
+    <h1 className='sidekick'>sidekick</h1>
     <div className='container'>
       <SwipeableList>
         <SwipeableListItem 
@@ -64,7 +64,13 @@ const MainPage = () => {
         </SwipeableListItem>
       </SwipeableList>
       <div className='gifContainer'>
-        <img className='gif' src='/client/src/assets/squad.gif'></img>
+        <img className='gif' src='/client/src/assets/squad-transparent.gif'></img>
+      </div>
+      <div className='backgroundimgContainer'>
+        <img className='backgroundimg' src='/client/src/assets/shape.png'></img>
+      </div>
+      <div className='backgroundimgContainer2'>
+        <img className='backgroundimg' src='/client/src/assets/shape.png'></img>
       </div>
     </div>
     {/* <Link to="/matches">

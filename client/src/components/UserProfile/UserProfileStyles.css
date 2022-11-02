@@ -9,6 +9,7 @@
   width: 100%;
   background-color: #c0fadf;
   height: 50rem;
+  z-index: 3;
 }
 
 .image {
