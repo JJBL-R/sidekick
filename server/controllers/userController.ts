@@ -17,7 +17,7 @@ const userController: UserController = {
   createUser: async (req, res, next): Promise<void> => {
     try {
       const { first_name, last_name, bio, age, email, zipcode, facebook_id, registered } = req.body;
-      const text = 'INSERT INTO user(first_name, last_name, bio, age, email, zipcode, facebook_id, registered) VALUES($1, $2, $3, $4, $5, $6, $7, $8)'
+      const text = 'INSERT INTO public.user(first_name, last_name, bio, age, email, zipcode, facebook_id, registered) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *'
       const params = [first_name, last_name, bio, age, email, zipcode, facebook_id, registered]
       if (!first_name || !last_name || !bio || !age || !email || !zipcode || !facebook_id) {
         return next({
@@ -25,11 +25,10 @@ const userController: UserController = {
           status: 400,
           message: 'Enter a valid first name, last name, bio, age, email, and/or zipcode.',
         });
-      } else {
+      }
         const result = await db.query(text, params);
         res.locals.user = result;
         return next();
-      };
     } catch (error) {
       return next({
         log: `Error caught in userController.createUser ${error}`,
