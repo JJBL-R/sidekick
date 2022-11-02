@@ -4,10 +4,10 @@ CREATE TABLE public.user
 	"first_name" VARCHAR(255) NOT NULL,
 	"last_name" VARCHAR(255) NOT NULL,
 	"bio" TEXT,
-	"age" INT NOT NULL,
+	"birthDate" DATE NOT NULL,
 	"email" VARCHAR(255) NOT NULL,
 	"zipcode" INT NOT NULL,
-  "facebook_id" VARCHAR NOT NULL,
+  "google_id" VARCHAR NOT NULL,
   "registered" BOOLEAN DEFAULT NULL,
 	PRIMARY KEY ("_id")
 ) WITH (

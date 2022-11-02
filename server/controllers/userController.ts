@@ -36,14 +36,14 @@ const userController: UserController = {
 
   createUser: async (req, res, next): Promise<void> => {
     try {
-      const { first_name, last_name, bio, age, email, zipcode, facebook_id, registered } = req.body;
-      const text = 'INSERT INTO public.user(first_name, last_name, bio, age, email, zipcode, facebook_id, registered) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *'
-      const params = [first_name, last_name, bio, age, email, zipcode, facebook_id, registered]
-      if (!first_name || !last_name || !bio || !age || !email || !zipcode || !facebook_id) {
+      const { first_name, last_name, bio, birthDate, email, zipcode, google_id } = req.body;
+      const text = 'INSERT INTO public.user(first_name, last_name, bio, birthDate, email, zipcode, google_id, registered) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *'
+      const params = [first_name, last_name, bio, birthDate, email, zipcode, google_id, true]
+      if (!first_name || !last_name || !bio || !birthDate || !email || !zipcode || !google_id) {
         return next({
           log: null,
           status: 400,
-          message: 'Enter a valid first name, last name, bio, age, email, and/or zipcode.',
+          message: 'Enter a valid first name, last name, bio, birthDate, email, and/or zipcode.',
         });
       }
         const result = await db.query(text, params);
@@ -81,9 +81,9 @@ const userController: UserController = {
 
   updateUser: async (req, res, next): Promise<void> => {
     try {
-      const { first_name, last_name, bio, age, email, zipcode, _id } = req.query;
-      const text = 'UPDATE public.user SET first_name=$1 last_name=$2 bio=$3 age=$4 email=$5 zipcode=$6 WHERE _id=$7 RETURNING *'
-      const params = [first_name, last_name, bio, age, email, zipcode, _id]
+      const { first_name, last_name, bio, birthDate, email, zipcode, _id } = req.query;
+      const text = 'UPDATE public.user SET first_name=$1 last_name=$2 bio=$3 birthDate=$4 email=$5 zipcode=$6 WHERE _id=$7 RETURNING *'
+      const params = [first_name, last_name, bio, birthDate, email, zipcode, _id]
       const result = await db.query(text, params);
       res.locals.update = result;
       return next();
