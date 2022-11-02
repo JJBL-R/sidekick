@@ -31,26 +31,22 @@ const MainPage = () => {
     // })
   }
 
-    const leadingActions = () => (
-        <LeadingActions>
-          <SwipeAction 
-          destructive={true}
-          onClick={handleSwipe}>
-            <SwipeRight/>
-          </SwipeAction>
-        </LeadingActions>
-      );
-      
-      const trailingActions = () => (
-        <TrailingActions>
-          <SwipeAction
-            destructive={true}
-            onClick={handleSwipe}>
-             <Swipeleft/>
-          </SwipeAction>
-        </TrailingActions>
-      );
-      
+  const leadingActions = () => (
+    <LeadingActions>
+      <SwipeAction destructive={true} onClick={handleSwipe}>
+        <SwipeRight />
+      </SwipeAction>
+    </LeadingActions>
+  );
+
+  const trailingActions = () => (
+    <TrailingActions>
+      <SwipeAction destructive={true} onClick={handleSwipe}>
+        <Swipeleft />
+      </SwipeAction>
+    </TrailingActions>
+  );
+
   return (
     <div className='mainPage'>
     <h1 className='sidekick'>sidekick</h1>

@@ -1,14 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 const db = require('../Sidekick_SQL');
+
 /**
+ * @typeParam getUser - method that grabs users from the database
  * @typeParam createUser - method that creates a user in the database
  * @typeParam verifyUser - method that logs user in
  * @typeParam updateUser - method that updates user info
  * @typeParam deleteUser - method that deletes a user
-\
  */
 
 interface UserController {
+  getUser: (req: Request, res: Response, next: NextFunction) => void;
   createUser: (req: Request, res: Response, next: NextFunction) => void;
   verifyUser: (req: Request, res: Response, next: NextFunction) => void;
   updateUser: (req: Request, res: Response, next: NextFunction) => void;
@@ -16,16 +18,32 @@ interface UserController {
 }
 
 const userController: UserController = {
+
+  getUser: async (req, res, next): Promise<void> => {
+    try {
+      const text = 'SELECT * FROM public.user'
+      const result = await db.query(text)
+      res.locals.users = result;
+      return next();
+    } catch (error) {
+      return next({
+        log: `Error caught in userController.getUser ${error}`,
+        status: 409,
+        message: `Error has occured in userController.getUser. ERROR: Unable to get user, and/or ${error}`,
+      });
+    };
+  },
+
   createUser: async (req, res, next): Promise<void> => {
     try {
-      const { first_name, last_name, bio, age, email, zipcode, facebook_id, registered } = req.body;
-      const text = 'INSERT INTO public.user(first_name, last_name, bio, age, email, zipcode, facebook_id, registered) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *'
-      const params = [first_name, last_name, bio, age, email, zipcode, facebook_id, registered]
-      if (!first_name || !last_name || !bio || !age || !email || !zipcode || !facebook_id) {
+      const { first_name, last_name, bio, birthdate, email, zipcode, google_id, city } = req.body;
+      const text = 'INSERT INTO public.user(first_name, last_name, bio, birthdate, email, zipcode, google_id, city, registered) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *'
+      const params = [first_name, last_name, bio, birthdate, email, zipcode, google_id, city, true]
+      if (!first_name || !last_name || !bio || !birthdate || !email || !zipcode || !google_id || !city) {
         return next({
           log: null,
           status: 400,
-          message: 'Enter a valid first name, last name, bio, age, email, and/or zipcode.',
+          message: 'Enter a valid first name, last name, bio, birthdate, email, and/or zipcode.',
         });
       }
         const result = await db.query(text, params);
@@ -42,16 +60,13 @@ const userController: UserController = {
   
   verifyUser: async (req, res, next): Promise<void> => {
     try {
-      const { registered } = req.body;
-    if (!registered) {
-        return next({
-          log: null,
-          status: 400,
-          message: 'Please register before proceeding.',
-        })
-    } else {
+      const { google_id } = req.body;
+      const text = `SELECT * FROM "user" WHERE google_id='${google_id}'`
+      const result = await db.query(text)
+      console.log(result);
+      if (result.rows.length > 0) res.locals.verify = true;
+      else res.locals.verify = false;
       return next();
-      };
     } catch (error) {
       return next({
         log: `Error caught in userController.verifyUser ${error}`,
@@ -63,9 +78,9 @@ const userController: UserController = {
 
   updateUser: async (req, res, next): Promise<void> => {
     try {
-      const { first_name, last_name, bio, age, email, zipcode, _id } = req.query;
-      const text = 'UPDATE public.user SET first_name=$1 last_name=$2 bio=$3 age=$4 email=$5 zipcode=$6 WHERE _id=$7 RETURNING *'
-      const params = [first_name, last_name, bio, age, email, zipcode, _id]
+      const { first_name, last_name, bio, birthdate, email, zipcode, city, _id } = req.query;
+      const text = 'UPDATE public.user SET first_name=$1 last_name=$2 bio=$3 birthdate=$4 email=$5 zipcode=$6 city=$7 WHERE _id=$8 RETURNING *'
+      const params = [first_name, last_name, bio, birthdate, email, zipcode, city, _id]
       const result = await db.query(text, params);
       res.locals.update = result;
       return next();
