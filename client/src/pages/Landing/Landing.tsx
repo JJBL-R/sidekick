@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import './Landing.scss';
-
+import { gapi } from 'gapi-script';
 import Facebook from '../../components/OAuth/Facebook';
 import Google from '../../components/OAuth/Google';
 
+const clientId = "600150108739-1hcnbkbmbctp79as2rjbk689efsh1mjb.apps.googleusercontent.com";
 // @ts-ignore
 import { Gradient } from './Gradient.js';
 
@@ -12,6 +13,17 @@ const Landing = () => {
   useEffect(() => {
     gradient.initGradient('#gradient-canvas');
   });
+
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: ""
+      })
+    };
+
+    gapi.load('client:auth2', start)
+  })
 
   return (
     <div className="landing">
