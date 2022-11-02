@@ -39,7 +39,7 @@ const userController: UserController = {
       const { first_name, last_name, bio, birthdate, email, zipcode, google_id, city } = req.body;
       const text = 'INSERT INTO public.user(first_name, last_name, bio, birthdate, email, zipcode, google_id, city, registered) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *'
       const params = [first_name, last_name, bio, birthdate, email, zipcode, google_id, city, true]
-      if (!first_name || !last_name || !bio || !birthdate || !email || !zipcode || !city) {
+      if (!first_name || !last_name || !bio || !birthdate || !email || !zipcode || !google_id || !city) {
         return next({
           log: null,
           status: 400,

@@ -7,7 +7,7 @@ CREATE TABLE public.user
 	"birthdate" VARCHAR NOT NULL,
 	"email" VARCHAR(255) NOT NULL,
 	"zipcode" INT NOT NULL,
-  "google_id" VARCHAR,
+  "google_id" VARCHAR NOT NULL,
   "registered" BOOLEAN DEFAULT NULL,
 	PRIMARY KEY ("_id")
 ) WITH (
@@ -69,6 +69,4 @@ VALUES ('Basketball', false),
        ('Tennis', true),
        ('Soccer', true);
 
-
-
-ALTER TABLE public.user ADD city VARCHAR(250) DEFAULT 'Vancouver';
+ALTER TABLE public.user ADD city VARCHAR(250) NOT NULL DEFAULT 'Vancouver';
