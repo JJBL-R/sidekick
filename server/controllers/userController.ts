@@ -1,11 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 const db = require('../Sidekick_SQL');
+
 /**
+ * @typeParam getUser - method that grabs users from the database
  * @typeParam createUser - method that creates a user in the database
  * @typeParam verifyUser - method that logs user in
  * @typeParam updateUser - method that updates user info
  * @typeParam deleteUser - method that deletes a user
-\
  */
 
 interface UserController {
@@ -17,6 +18,7 @@ interface UserController {
 }
 
 const userController: UserController = {
+
   getUser: async (req, res, next): Promise<void> => {
     try {
       const text = 'SELECT * FROM public.user'
@@ -30,7 +32,6 @@ const userController: UserController = {
         message: `Error has occured in userController.getUser. ERROR: Unable to get user, and/or ${error}`,
       });
     };
-
   },
 
   createUser: async (req, res, next): Promise<void> => {

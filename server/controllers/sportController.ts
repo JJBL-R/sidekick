@@ -1,6 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 const db = require('../Sidekick_SQL');
 
+/**
+ * @typeParam getSport - method that gets sport
+ * @typeParam postSport - method that creates a Sport in the database
+ * @typeParam updateSport - method that updates Sport info
+ * @typeParam deleteSport - method that deletes a Sport
+ */
+
 interface SportController {
   getSport: (req: Request, res: Response, next: NextFunction) => void;
   postSport: (req: Request, res: Response, next: NextFunction) => void;
