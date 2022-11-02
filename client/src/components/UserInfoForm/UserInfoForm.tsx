@@ -1,79 +1,108 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import {
+  Stack,
+  Input,
+  Button,
+  Checkbox,
+  CheckboxGroup,
+} from '@chakra-ui/react';
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  useDisclosure,
+} from '@chakra-ui/react';
+import { FormLabel } from '@chakra-ui/react';
 
 const UserInfoForm = () => {
-    const Navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { register, handleSubmit, reset } = useForm();
+  const onSubmit = (data: any) => {
+    console.log(data);
+    reset();
+  };
 
-    const handleAddUserInfo = (e:any) => {
-        let newCity = e.target[0].value;
-        let newZipCode = e.target[1].value;
-        let newSport = e.target[2].value;
-        let newBio = e.target[3].value;
-        let newPhoto = e.target[4].value;
-
-        console.log(newPhoto);
-        console.log(e);
-
-        e.preventDefault();
-        // fetch('', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         city: newCity,
-        //         zipCode: newZipCode,
-        //         sport: newSport,
-        //         bio: newBio,
-        //         photo: newPhoto,
-        //     }),
-        // })
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //         console.log('Successfuly added', data);
-        //     })
-        //     .catch((err) => {
-        //         console.log('addUser error front', err);
-        //     });
-        Navigate('/mainPage')
-    };
+  useEffect(() => onOpen());
 
   return (
-    <div>
-      <form onSubmit={handleAddUserInfo}>
-        <input
-            id="city"
-            type="text"
-            placeholder="City"
-            required
-        />
-         <input
-            id="zip"
-            type="number"
-            placeholder="Zip code"
-            required
-        />
-        <input
-            id="sport"
-            type="text"
-            placeholder="Activity"
-            required
-        />
-         <input
-            id="bio"
-            type="text"
-            placeholder="Bio"
-            required
-        />
-           <input
-            id="photo"
-            type="file"
-            required
-        />
-            <input value="Submit" type="submit"/>
-      </form>
+    <div className="user-info-form">
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader textAlign="center" fontFamily="Poppins" fontSize="3rem">
+            <h1>Register for Sidekick</h1>
+          </ModalHeader>
+          <ModalBody>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Stack spacing={7}>
+                <Input
+                  required
+                  variant="flushed"
+                  placeholder="First Name"
+                  _placeholder={{ color: 'gray' }}
+                  {...register('firstname')}
+                />
+                <Input
+                  required
+                  variant="flushed"
+                  placeholder="Last Name"
+                  _placeholder={{ color: 'gray' }}
+                  {...register('lastname')}
+                />
+                <Input
+                  required
+                  variant="flushed"
+                  placeholder="Email"
+                  _placeholder={{ color: 'gray' }}
+                  {...register('email')}
+                />
+                <Input
+                  required
+                  variant="flushed"
+                  placeholder="Zipcode"
+                  minLength={5}
+                  maxLength={5}
+                  _placeholder={{ color: 'gray' }}
+                  {...register('zip')}
+                />
+                <FormLabel color="gray" fontWeight={400}>
+                  Birth Date
+                </FormLabel>
+                <Input
+                  id="birthdate"
+                  placeholder="Birth Date"
+                  type="date"
+                  {...register('birthdate', { required: true })}
+                />
+                <CheckboxGroup colorScheme="red">
+                  <FormLabel color="gray" fontWeight={400}>
+                    Sports
+                  </FormLabel>
+                  <Stack spacing={[1, 5]} direction={['column', 'row']}>
+                    <Checkbox value="tennis" {...register('sports')}>
+                      Tennis
+                    </Checkbox>
+                    <Checkbox value="soccer" {...register('sports')}>
+                      Soccer
+                    </Checkbox>
+                    <Checkbox value="basketball" {...register('sports')}>
+                      Basketball
+                    </Checkbox>
+                  </Stack>
+                </CheckboxGroup>
+                <Button type="submit" colorScheme="red">
+                  Submit
+                </Button>
+              </Stack>
+            </form>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default UserInfoForm
+export default UserInfoForm;
