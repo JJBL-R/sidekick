@@ -7,9 +7,15 @@ router.get('/', userController.getUser, (req, res) => {
   res.status(200).json(res.locals.users);
 })
 
-router.post('/', userController.verifyUser, userController.createUser, (req, res) => {
+router.post('/', userController.createUser, (req, res) => {
   res.status(200).json(res.locals.user);
 });
+
+router.post('/verify', userController.verifyUser, (req, res) => {
+  res.status(200).json(res.locals.user);
+});
+
+
 
 router.patch('/', userController.updateUser, (req, res) => {
   res.status(200).json(res.locals.update);
