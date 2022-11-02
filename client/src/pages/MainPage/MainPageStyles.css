@@ -1,16 +1,33 @@
-.body {
-    margin: 0;
-    padding: 0;
-}
-
-
 .mainPage {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    background-color: #FEFEFE;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 3;
 }
 
 .swipeable-list-item__content {
     display: flex;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-radius: 2rem;
+}
+
+.gif{
+    position: relative;
+}
+
+.gifContainer{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
 }
